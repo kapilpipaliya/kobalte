@@ -183,7 +183,8 @@ export function NumberFieldRoot<T extends ValidComponent = "div">(
 		return new NumberFormatter(locale(), local.formatOptions);
 	});
 
-	const formatNumber = (number: number) => local.format ? numberFormatter().format(number) : number.toString();
+	const formatNumber = (number: number) =>
+		local.format ? numberFormatter().format(number) : number.toString();
 
 	const parseRawValue = (value: string | number | undefined) =>
 		local.format && typeof value !== "number"
@@ -203,9 +204,7 @@ export function NumberFieldRoot<T extends ValidComponent = "div">(
 		value: () => local.value,
 		defaultValue: () => local.defaultValue ?? local.rawValue,
 		onChange: (value) => {
-			local.onChange?.(
-				typeof value === "number" ? formatNumber(value) : value,
-			);
+			local.onChange?.(typeof value === "number" ? formatNumber(value) : value);
 			local.onRawValueChange?.(parseRawValue(value));
 		},
 	});
