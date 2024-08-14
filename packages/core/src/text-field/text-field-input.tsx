@@ -97,7 +97,7 @@ export function TextFieldInputBase<T extends ValidComponent = "input">(
 			aria-required={formControlContext.isRequired() || undefined}
 			aria-disabled={formControlContext.isDisabled() || undefined}
 			aria-readonly={formControlContext.isReadOnly() || undefined}
-			onInput={composeEventHandlers([local.onInput, context.onInput])}
+			onChange={composeEventHandlers([local.onInput, context.onInput])}
 			{...formControlContext.dataset()}
 			{...others}
 		/>
