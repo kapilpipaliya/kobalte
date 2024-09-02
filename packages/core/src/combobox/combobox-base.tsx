@@ -589,13 +589,18 @@ export function ComboboxBase<
 
 	const { present: contentPresent } = createPresence({
 		show: () => local.forceMount || disclosureState.isOpen(),
-		element: contentRef,
+		element: () => contentRef() ?? null,
 	});
 
 	const open = (
 		focusStrategy: FocusStrategy | boolean,
 		triggerMode?: ComboboxTriggerMode,
 	) => {
+		// If set to only open manually, ignore other triggers
+		if (local.triggerMode === "manual" && triggerMode !== "manual") {
+			return;
+		}
+
 		// Show all option if menu is manually opened.
 		const showAllOptions = setShowAllOptions(triggerMode === "manual");
 
